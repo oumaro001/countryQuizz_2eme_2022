@@ -1,0 +1,129 @@
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body{
+
+    position: relative;
+    padding-bottom: 550px;
+    background-color: lightblue;
+}
+header{
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: white !important;
+}
+
+header >img{
+
+    width: 10em;
+    margin: 10px 0;
+}
+
+
+.nav-link{
+
+    position: relative;
+    overflow: hidden;
+  
+
+}
+.nav-link:hover{
+
+    color: tomato !important;
+    border: 1px double tomato;
+    background-color: lightblue;
+    
+}
+
+.nav-link::after{
+
+    content: '⭐​';
+    position: absolute;
+    transform: translate(-63px,30px);
+}
+
+.nav-link:hover::after{
+
+    transform: translate(-5px,-35px);
+    transition: 2s;
+}
+
+/******************* POINTS**********************************/
+
+.points{
+
+    background-color: rgb(116, 234, 228);
+    width: 100%;
+    height: 90px;
+    color: black;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+section{
+    display: flex;
+    flex-flow:  wrap;
+    justify-content: space-between;
+    margin: 50px 30px;
+    
+    
+}
+
+footer{
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding-bottom: 200px;
+    background-color: black;
+    width: 100%;
+    color: white;
+    
+
+}
+
+.block_Question{
+
+    display: none;
+    flex-flow: column wrap;
+    color: red;
+    width: 25%;
+    height: 150px;
+}
+
+.block_Question > p{
+
+    color: black;
+    font-size: 2em;
+    text-align: center;
+    font-style: italic;
+    border: 1px dashed red;
+}
+.drapeau > img{
+    width: 20em;
+    height: 15em;
+}
+
+.question_Reponces >p{
+
+    text-align: center;
+    color: black;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.question_Reponces >p:hover{
+
+    transform: scale(1.2);
+    color: red;
+    border: 1px solid green;
+}
