@@ -18,10 +18,16 @@ let btnWorld = document
   .getElementById("world")
   .addEventListener("click", () => dataContinent("all"));
   
+let section = document.getElementById("section");
 
   let drapeau = document.querySelector('.drapeau');
   let question_Reponces = document.querySelector('.question_Reponces');
   let block_Question;
+  let pointsBlock = document.querySelector('.pointsBlock');
+  let winnerPoints = 0;
+  let looserPoints = 0;
+  let maxPoints = 11;
+  let chance = 0
   
   /* FONCTION POUR GERER LE RANDOM*****************/
   
@@ -45,7 +51,7 @@ let btnWorld = document
   tabNumeroRandom.push(rep1,rep2,rep3);
   
   
-  console.log(tabNumeroRandom);
+  
 
 
   return (tabNumeroRandom)
@@ -61,7 +67,6 @@ function recupCountry (tabNum,tabPays,TabCountry) {
 
     if(tabPays.indexOf(tabNum[i])){
       TabCountry.push(tabPays[tabNum[i]]);
-      console.log(TabCountry[i]);
     }
   
   }
@@ -71,7 +76,7 @@ function recupCountry (tabNum,tabPays,TabCountry) {
 /*************Function qui affiche les questions ***********/
 
 function showQuestion(TabCountry,bonneReponse){
-  
+
   block_Question = document.querySelector('.block_Question').style.display = 'block';
   let nbr = 1;
   drapeau.innerHTML='';
@@ -89,24 +94,79 @@ function showQuestion(TabCountry,bonneReponse){
  
 }
 
+/*****Function qui compte les points et qui les affiche */
 
+function showPoints(winnerPoints,looserPoints){
 
+  pointsBlock.innerHTML=`<div class="points">
+                          <img src="./assets/win2.gif">
+                          <p>Bonne réponses : ${winnerPoints}</p>
+                          </div>   
+                          <div class="points">
+                          <img src="./assets/looser2.gif">
+                          <p>Mauvaise réponses : ${looserPoints}</p>
+                          </div> `
+}
 
+/*****function qui annonce la fin du jeu */
  
+function endGame(maxPoints,chance,winnerPoints,looserPoints){
+
+  if(chance == maxPoints){
+
+      let finalPoints = winnerPoints > looserPoints ? winnerPoints : looserPoints;
+     
+      if(finalPoints == winnerPoints){
+        section.innerHTML=' '
+        section.innerHTML=`<div class="imgEndGame"><img src="./assets/win3.gif" alt="winner images" style="witdh:20rem"> <p>T\'as gagné 😀​</p> <button class="btn btn-success ml-2" onclick='gameGO()'>Recommencer</button></div>`
+        section.style.justifyContent="center";
+
+      }
+      else{
+        section.innerHTML=' '
+        section.innerHTML=`<div class="imgEndGame"><img src="./assets/looser.gif" alt="looser images" style="witdh:20rem"> <p>T\'as perdu ​😭​</p><button class="btn btn-success ml-2" onclick='gameGO()'>Recommencer</button></div>`;
+        section.style.justifyContent="center";
+
+      }
+
+
+  }
+
+}
+
+
+/*****function qui recommance le jeu */
+
+function gameGO(){
+  
+    w=location.reload();
+
+}
 
 
 
 /************function qui verifie le resultats **************/
 
-function VerifResult(rep,bonneReponse){
+function VerifResult(rep,bonneReponse,continent){
+ 
+    
 
-  console.log(rep);
   if(rep.innerText == bonneReponse[0].name.common){
+    winnerPoints++;
+    showPoints(winnerPoints,looserPoints);
+     
+      dataContinent(continent)
 
-    console.log(true);
-  }else console.log(false);
+    
+  }else {looserPoints++;
 
+  showPoints(winnerPoints,looserPoints);
+ 
+  dataContinent(continent)
+}
 
+chance++;
+endGame(maxPoints,chance,winnerPoints,looserPoints);
 }
 
 /**********APPEL D'API****************** */
@@ -139,7 +199,6 @@ function dataContinent(continent) {
         recupCountry(tabNumeroRandom,resultContinent,TabCountry)
 
         bonneReponse.push(TabCountry[Math.floor(Math.random() * (0, TabCountry.length))]) ;
-        console.log(bonneReponse[0].name.common);
 
         showQuestion(TabCountry,bonneReponse);
 
@@ -149,19 +208,19 @@ function dataContinent(continent) {
       
         rep1.addEventListener('click',()=>{
       
-          console.log(rep1);
-          VerifResult(rep1,bonneReponse)
+          
+          VerifResult(rep1,bonneReponse,continent)
         })
         rep2.addEventListener('click',()=>{
       
-          console.log(rep2);
-          VerifResult(rep2,bonneReponse)
+          
+          VerifResult(rep2,bonneReponse,continent)
         })
         
         rep3.addEventListener('click',()=>{
       
-          console.log(rep3);
-          VerifResult(rep3,bonneReponse)
+          
+          VerifResult(rep3,bonneReponse,continent)
         })
       
         
