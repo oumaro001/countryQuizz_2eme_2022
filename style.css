@@ -9,7 +9,7 @@
 body{
 
     position: relative;
-    padding-bottom: 550px;
+    padding-bottom: 350px;
     background-color: lightblue;
 }
 header{
@@ -22,8 +22,7 @@ header{
 
 header >img{
 
-    width: 10em;
-    margin: 10px 0;
+    width: 6.5em;
 }
 
 
@@ -102,8 +101,8 @@ header >img{
 section{
     display: flex;
     flex-flow:  wrap;
-    justify-content: space-between;
-    margin: 50px 30px;
+    justify-content: space-evenly;
+    margin: 30px 30px;
     
     
 }
@@ -115,7 +114,7 @@ footer{
     left: 0;
     right: 0;
     width: 100%;
-    padding-bottom: 200px;
+    padding-bottom: 10px;
     background-color: black;
     width: 100%;
     color: white;
@@ -131,7 +130,6 @@ footer{
     display: none;
     flex-flow: column wrap;
     color: red;
-    width: 25%;
     height: 150px;
 }
 
@@ -141,18 +139,23 @@ footer{
     font-size: 2em;
     text-align: center;
     font-style: italic;
-    border: 1px dashed red;
+    border: 2px solid red;
+    padding: 4px;
 }
 .drapeau > img{
     width: 20em;
     height: 15em;
 }
 
+.question_Reponces{
+
+    margin-top: 40px;
+}
 .question_Reponces >p{
 
     text-align: center;
     color: black;
-    font-size: 1.2em;
+    font-size: 17px;
     cursor: pointer;
 }
 
@@ -161,21 +164,58 @@ footer{
     transform: scale(1.2);
     color: red;
     border: 1px solid green;
+    margin: 15px 50px;
 }
 
 .barreCompteur{
 
     width: 100%;
-    height: 100px;
+    height: 40px;
+    display: none;
     border: 4px solid green;
+    position: relative;
+    margin: 0 180px;
+    margin-bottom: 100px;
 }
 
 
-/*
+
 .barreCompteur::before{
 
-    content: "";
-    width: 110%;
-    height: 80px;
-    background-color: red;
-}*/
+    content: " ";
+    position: absolute;
+    width: 1%;
+    height: 100%;
+    transform: translateX(00px);
+    animation: jaugeColor 10s forwards ease
+      
+}
+
+
+@keyframes jaugeColor {
+    from{
+        background-color: green;
+
+    }
+
+    to{
+        background-color: red;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 840px) {
+
+    body{
+        padding-bottom: 555px;
+
+    }
+}
+
+@media screen and (min-width: 841px) and (max-width: 1200px) {
+
+    footer{
+        display: none;
+
+    }
+}

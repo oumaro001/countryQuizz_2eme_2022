@@ -28,6 +28,7 @@ let section = document.getElementById("section");
   let looserPoints = 0;
   let maxPoints = 11;
   let chance = 0
+  let clickVerif = false;
   
   /* FONCTION POUR GERER LE RANDOM*****************/
   
@@ -59,7 +60,7 @@ let section = document.getElementById("section");
 }
 
 
-/*********fonction pour recuperer les pays */
+/********* fonction pour recuperer les pays */
 
 function recupCountry (tabNum,tabPays,TabCountry) {
 
@@ -73,9 +74,10 @@ function recupCountry (tabNum,tabPays,TabCountry) {
 }
 
 
+
 /*************Function qui affiche les questions ***********/
 
-function showQuestion(TabCountry,bonneReponse){
+function showQuestion(TabCountry,bonneReponse,continent){
 
   block_Question = document.querySelector('.block_Question').style.display = 'block';
   let nbr = 1;
@@ -90,9 +92,11 @@ function showQuestion(TabCountry,bonneReponse){
         nbr++
     }
     
+   
   
  
 }
+
 
 /*****Function qui compte les points et qui les affiche */
 
@@ -135,29 +139,24 @@ function endGame(maxPoints,chance,winnerPoints,looserPoints){
 }
 
 
-/*****function qui recommance le jeu */
+/*****function qui recommence le jeu */
 
 function gameGO(){
   
-    w=location.reload();
+    location.reload();
 
 }
-
-
 
 /************function qui verifie le resultats **************/
 
 function VerifResult(rep,bonneReponse,continent){
  
-    
-
   if(rep.innerText == bonneReponse[0].name.common){
     winnerPoints++;
     showPoints(winnerPoints,looserPoints);
      
       dataContinent(continent)
 
-    
   }else {looserPoints++;
 
   showPoints(winnerPoints,looserPoints);
@@ -176,9 +175,9 @@ function dataContinent(continent) {
   let tabNumeroRandom= [];
   let bonneReponse = [];
   let TabCountry = [];
- 
-  
+  clickVerif = false;
 
+ 
   let req = new XMLHttpRequest();
 
   if (continent == "all") {
@@ -202,30 +201,40 @@ function dataContinent(continent) {
 
         showQuestion(TabCountry,bonneReponse);
 
+
         let rep1 = document.querySelector('.reponces1');
         let rep2 = document.querySelector('.reponces2');
         let rep3 = document.querySelector('.reponces3');
       
         rep1.addEventListener('click',()=>{
       
-          
+          clickVerif = true;
+
           VerifResult(rep1,bonneReponse,continent)
         })
         rep2.addEventListener('click',()=>{
       
-          
+          clickVerif = true;
+
           VerifResult(rep2,bonneReponse,continent)
         })
         
         rep3.addEventListener('click',()=>{
-      
+          clickVerif = true;
           
           VerifResult(rep3,bonneReponse,continent)
         })
-      
         
+
       }
+    }else{
+
+      window.alert('ERROR 404');
     }
   };
+
+
 }
+
+
 
